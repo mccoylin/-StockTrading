@@ -4,7 +4,7 @@ Author: [LuoD](https://github.com/RonDen/)，何显，文淳正
 
 ## 安装说明
 
-本项目基于Python3.6、Django2.1、MySql8.0（最好不要使用5.6，字符集等方面均不兼容，否则导入数据库会出错）与股票信息工具包TuShare实现。
+本项目基于Python3、Django2.1、MySql8.0 与股票信息工具包TuShare实现。
 
 1. 克隆该项目
 ```bash
@@ -13,20 +13,25 @@ $ git clone https://github.com/RonDen/-StockTrading.git
 
 2. 创建或激活对应Python开发环境
 
-这里使用了conda来管理环境，强烈推荐，避免不同环境包干扰、依赖的问题。
 ```bash
-$ conda activate Webdev
-(Webdev)$ 
-# 或者
-$ conda create -n Webdev python=3.6
-$ conda activate Webdev
-(Webdev)$ 
+$ sudo apt install python3-virtualenv
+$ python3 -m virtualenv webdev
+$ source webdev/bin/activate 
+
+(webdev)機器名稱： $
+
+```
+要離開 webdev
+```bash
+(webdef)機器名稱: $ deactivate
+$
+
 ```
 
 3. 安装所需要的依赖包
 
 ```bash
-pip install -r requirements.txt
+$ pip3 install -r requirements.txt
 ```
 本项目依赖的核心包有：Django 2.1.15与tushare pro，前者作为主要开发框架，后者是爬取股票数据的核心包。tushare需要依赖pandas等包，用于数据分析和处理。
 my-fake-useragent用于生成伪请求头，爬取相应的新闻数据。
@@ -35,10 +40,13 @@ django-mptt用于生成树形多级评论。
 
 4. 创建对应数据库（stocktrading）和用户（trading）
 ```sql
-create database stocktrading;
-create user 'trading'@'localhost' identified by trading;
-grant all privileges on stocktrading to 'trading'@'localhost';
-flush privileges;
+$ sudo mysql
+mysql>
+
+mysql> create database stocktrading;
+mysql> create user 'trading'@'localhost' identified by 'your_password';
+mysql> grant all privileges on stocktrading.* to 'trading'@'localhost';
+mysql> flush privileges;
 ```
 
 5. 执行迁移命令，创建模型数据表映射
