@@ -1,18 +1,18 @@
 #!/usr/bin/python3 
 # -*- coding: utf-8 -*-
 
-
-import mysql.connector
-import pandas as pd
-import re
-
-
 # 移除 mysql 裡的 stocktrading.user_table 欄位 'photo_url' 前的 '..' 兩個字元
 # 更新 stocktrading.user_table 欄位 'phone_number'
 #
 # 使用 mysql.connector.connect() 連線到 mysql
-# 使用 RE 處理字串
+# 使用 RE 處理字串，不會造成多跑幾回就刪掉必要的字
 # 使用 pandas 轉成 DataFrame, 容易使用欄位名稱
+
+
+import mysql.connector
+import pandas as pd
+import re
+from mysql_connect import get_mysql_connection
 
 
 # 查詢出 user_table 裡的資料, 取出 phone_number, photo_url 欄位就夠。
@@ -21,16 +21,7 @@ sql_user_table = "select phone_number, photo_url from user_table;"
 # 更新 user_table 裡的 photo_url，phone_number 是 key
 sql_update = "update user_table set photo_url=%s where phone_number=%s;"
 
-
-conn = mysql.connector.connect(
-    host = "127.0.0.1",
-    port = 3306,
-    user = "trading",
-    password = "YOUR_PASSWORD_記得修改",
-    db = "stocktrading",
-    charset = "utf8mb4"
-)
-
+conn = get_mysql_connection()
 
 with conn:
     with conn.cursor(dictionary=True) as cursor:
