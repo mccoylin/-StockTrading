@@ -8,11 +8,23 @@
 # from mysql_connect import get_mysql_connection
 
 import mysql.connector
+import pymysql
 
 
 # Connect to the database
 def get_mysql_connection():
 	return mysql.connector.connect(
+		host="127.0.0.1",
+		port=3306,
+		user="trading",
+        password = "YOUR_PASSWORD_記得修改",
+		db="stocktrading",
+		charset="utf8mb4"
+	)
+
+
+def get_pymysql_connection():
+    return pymysql.connect(
 		host="127.0.0.1",
 		port=3306,
 		user="trading",
