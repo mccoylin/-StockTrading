@@ -21,8 +21,8 @@ $ source webdev/bin/activate
 (webdev)機器名稱： $
 
 ```
-要離開 webdev
 ```bash
+要離開(webdef) 環境
 (webdef)機器名稱: $ deactivate
 $
 
@@ -48,6 +48,8 @@ mysql> create user 'trading'@'localhost' identified by 'your_password';
 mysql> grant all privileges on stocktrading.* to 'trading'@'localhost';
 mysql> flush privileges;
 ```
+密碼可以參考
+https://www.avast.com/zh-tw/random-password-generator#pc
 
 5. 执行迁移命令，创建模型数据表映射
 
